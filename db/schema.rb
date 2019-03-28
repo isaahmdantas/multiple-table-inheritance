@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_28_125533) do
+ActiveRecord::Schema.define(version: 2019_03_28_131211) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,14 @@ ActiveRecord::Schema.define(version: 2019_03_28_125533) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "medicamentos", force: :cascade do |t|
+    t.bigint "medicamento_id"
+    t.text "bula"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["medicamento_id"], name: "index_medicamentos_on_medicamento_id"
+  end
+
   create_table "produtos", force: :cascade do |t|
     t.bigint "produto_id"
     t.string "categoria"
@@ -44,5 +52,6 @@ ActiveRecord::Schema.define(version: 2019_03_28_125533) do
   end
 
   add_foreign_key "equipamentos", "insumos", column: "equipamento_id"
+  add_foreign_key "medicamentos", "insumos", column: "medicamento_id"
   add_foreign_key "produtos", "insumos", column: "produto_id"
 end
